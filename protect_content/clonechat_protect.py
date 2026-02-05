@@ -94,6 +94,11 @@ async def get_chat_info(
             or False if chat_input invalid
     """
 
+    if isinstance(chat_input, str):
+        chat_input = chat_input.strip()
+        if chat_input.replace("-", "").isnumeric():
+            chat_input = int(chat_input)
+
     try:
         chat_obj = await client.get_chat(chat_input)
         chat_id = chat_obj.id
